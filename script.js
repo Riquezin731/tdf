@@ -9,7 +9,7 @@ const resetButton = document.getElementById('reset-btn');
 
 function createBoard() {
     board = [];
-    revealedCells = 0;
+    revealedCells = 5;
     gameOver = false;
 
     // Limpa o tabuleiro
