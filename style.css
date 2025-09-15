@@ -1,34 +1,35 @@
-/* Estilos gerais para o corpo e o container do jogo */
+/* Estilos globais */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #333;
-    color: #fff;
+    background-color: #2c3e50; /* Azul escuro */
+    color: #ecf0f1; /* Cinza claro */
     margin: 0;
 }
 
 .game-container {
     text-align: center;
-    background: #444;
-    padding: 20px;
+    background: #34495e; /* Um tom de azul um pouco mais claro */
+    padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
-    color: #fff;
+    margin-top: 0;
+    color: #ecf0f1;
 }
 
-/* Estilos para o painel de informações */
+/* Painel de informações (minas, botão, tempo) */
 .info-panel {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background: #222;
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 5px;
     margin-bottom: 20px;
 }
@@ -40,93 +41,100 @@ h1 {
 }
 
 .info-label {
-    font-size: 0.8em;
+    font-size: 0.8rem;
     text-transform: uppercase;
+    color: #bdc3c7;
 }
 
 #mine-count, #timer {
-    font-size: 2em;
+    font-size: 2rem;
     font-weight: bold;
-    color: #ffcc00; /* Cor amarela para os números */
+    color: #f1c40f; /* Amarelo */
 }
 
-/* Estilo do botão de reset */
+/* Botão de reinício */
 #reset-button {
-    font-size: 2em;
+    font-size: 2rem;
     cursor: pointer;
-    background: #ddd;
+    background: #ecf0f1;
     border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+#reset-button:hover {
+    transform: scale(1.1);
 }
 
 /* Estilo da grade do jogo */
 #grid {
     display: grid;
     border: 2px solid #555;
-    background-color: #777;
-    margin-top: 10px;
 }
 
-/* Estilo dos quadrados da grade */
+/* Estilo de cada quadrado */
 .square {
-    width: 30px; /* Largura padrão dos quadrados */
-    height: 30px; /* Altura padrão dos quadrados */
-    background-color: #ccc;
-    border: 2px solid #999;
-    box-sizing: border-box; /* Garante que o padding e a borda não aumentem o tamanho total */
+    width: 30px;
+    height: 30px;
+    background-color: #7f8c8d; /* Cinza de fundo */
+    border: 2px solid #95a5a6;
+    box-sizing: border-box;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    color: #000;
+    font-size: 1.2rem;
 }
 
 /* Estilo do quadrado revelado */
 .square.revealed {
-    background-color: #e0e0e0;
-    border-color: #bbb;
+    background-color: #bdc3c7; /* Cinza claro revelado */
+    border-color: #95a5a6;
     cursor: default;
 }
 
-/* Cores para os números de minas adjacentes */
-.square.number-1 { color: blue; }
-.square.number-2 { color: green; }
-.square.number-3 { color: red; }
-.square.number-4 { color: darkblue; }
-.square.number-5 { color: darkred; }
-.square.number-6 { color: teal; }
-.square.number-7 { color: black; }
-.square.number-8 { color: gray; }
+/* Cores para os números */
+.square.number-1 { color: #2980b9; } /* Azul */
+.square.number-2 { color: #27ae60; } /* Verde */
+.square.number-3 { color: #c0392b; } /* Vermelho */
+.square.number-4 { color: #8e44ad; } /* Roxo */
+.square.number-5 { color: #d35400; } /* Laranja */
+.square.number-6 { color: #16a085; } /* Verde-azulado */
+.square.number-7 { color: #34495e; } /* Azul escuro */
+.square.number-8 { color: #7f8c8d; } /* Cinza */
 
-/* Estilo para a mina revelada */
+/* Estilo para a mina */
 .square.mine {
-    background-color: red;
+    background-color: #e74c3c; /* Vermelho forte */
+    color: white;
+}
+
+.square.mine::before {
+    content: "💣";
 }
 
 /* Estilo para a bandeira */
+.square.flag {
+    color: white; /* Cor para a bandeira */
+}
+
 .square.flag::before {
     content: "🚩";
-    font-size: 1.5em;
 }
 
-/* Estilos para mensagens de fim de jogo */
+/* Mensagens de status */
 #game-message {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
-#game-message.win {
-    color: greenyellow;
-}
-
-#game-message.lose {
-    color: red;
-}
-
-/* Classe utilitária para esconder elementos */
 .hidden {
     display: none;
 }
