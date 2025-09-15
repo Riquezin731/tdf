@@ -1,129 +1,132 @@
-const boardSize = 10;
-const totalMines = 10;
-let board = [];
-let revealedCells = 0;
-let gameOver = false;
-
-const gameBoard = document.getElementById('game-board');
-const resetButton = document.getElementById('reset-btn');
-
-function createBoard() {
-    board = [];
-    revealedCells = 5;
-    gameOver = false;
-
-    // Limpa o tabuleiro
-    gameBoard.innerHTML = '';
-    
-    // Cria o tabuleiro com células
-    for (let i = 0; i < boardSize; i++) {
-        const row = [];
-        for (let j = 0; j < boardSize; j++) {
-            const cell = {
-                mine: false,
-                revealed: false,
-                x: i,
-                y: j,
-                adjacentMines: 0
-            };
-            row.push(cell);
-            
-            const cellElement = document.createElement('div');
-            cellElement.classList.add('cell');
-            cellElement.dataset.x = i;
-            cellElement.dataset.y = j;
-            cellElement.addEventListener('click', handleCellClick);
-            gameBoard.appendChild(cellElement);
-        }
-        board.push(row);
-    }
-
-    // Coloca as minas
-    let minesPlaced = 0;
-    while (minesPlaced < totalMines) {
-        const x = Math.floor(Math.random() * boardSize);
-        const y = Math.floor(Math.random() * boardSize);
-
-        if (!board[x][y].mine) {
-            board[x][y].mine = true;
-            minesPlaced++;
-        }
-    }
-
-    // Calcula as minas adjacentes
-    for (let i = 0; i < boardSize; i++) {
-        for (let j = 0; j < boardSize; j++) {
-            if (board[i][j].mine) continue;
-            let adjacentMines = 0;
-            for (let dx = -1; dx <= 1; dx++) {
-                for (let dy = -1; dy <= 1; dy++) {
-                    const nx = i + dx;
-                    const ny = j + dy;
-                    if (nx >= 0 && ny >= 0 && nx < boardSize && ny < boardSize) {
-                        if (board[nx][ny].mine) adjacentMines++;
-                    }
-                }
-            }
-            board[i][j].adjacentMines = adjacentMines;
-        }
-    }
+/* Estilos gerais para o corpo e o container do jogo */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333;
+    color: #fff;
+    margin: 0;
 }
 
-function handleCellClick(event) {
-    if (gameOver) return;
-
-    const x = event.target.dataset.x;
-    const y = event.target.dataset.y;
-    const cell = board[x][y];
-    
-    if (cell.revealed) return;
-
-    cell.revealed = true;
-    revealedCells++;
-    const cellElement = event.target;
-
-    if (cell.mine) {
-        cellElement.classList.add('mine');
-        gameOver = true;
-        alert('Você perdeu! Clique em "Reiniciar Jogo".');
-    } else {
-        cellElement.classList.add('revealed');
-        if (cell.adjacentMines > 0) {
-            cellElement.textContent = cell.adjacentMines;
-        } else {
-            revealAdjacentCells(x, y);
-        }
-    }
-
-    if (revealedCells === boardSize * boardSize - totalMines) {
-        alert('Você venceu!');
-    }
+.game-container {
+    text-align: center;
+    background: #444;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-function revealAdjacentCells(x, y) {
-    for (let dx = -1; dx <= 1; dx++) {
-        for (let dy = -1; dy <= 1; dy++) {
-            const nx = x + dx;
-            const ny = y + dy;
-            if (nx >= 0 && ny >= 0 && nx < boardSize && ny < boardSize) {
-                const adjacentCell = board[nx][ny];
-                const cellElement = gameBoard.children[nx * boardSize + ny];
-                if (!adjacentCell.revealed && !adjacentCell.mine) {
-                    adjacentCell.revealed = true;
-                    cellElement.classList.add('revealed');
-                    revealedCells++;
-                    if (adjacentCell.adjacentMines === 0) {
-                        revealAdjacentCells(nx, ny);
-                    } else {
-                        cellElement.textContent = adjacentCell.adjacentMines;
-                    }
-                }
-            }
-        }
-    }
+h1 {
+    color: #fff;
 }
 
-resetButton.addEventListener('click', createBoard);
+/* Estilos para o painel de informações */
+.info-panel {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #222;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
 
-// Inicia o jogo ao carregar a página
-createBoard();
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+#mine-count, #timer {
+    font-size: 2em;
+    font-weight: bold;
+    color: #ffcc00; /* Cor amarela para os números */
+}
+
+/* Estilo do botão de reset */
+#reset-button {
+    font-size: 2em;
+    cursor: pointer;
+    background: #ddd;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+/* Estilo da grade do jogo */
+#grid {
+    display: grid;
+    border: 2px solid #555;
+    background-color: #777;
+    margin-top: 10px;
+}
+
+/* Estilo dos quadrados da grade */
+.square {
+    width: 30px; /* Largura padrão dos quadrados */
+    height: 30px; /* Altura padrão dos quadrados */
+    background-color: #ccc;
+    border: 2px solid #999;
+    box-sizing: border-box; /* Garante que o padding e a borda não aumentem o tamanho total */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Estilo do quadrado revelado */
+.square.revealed {
+    background-color: #e0e0e0;
+    border-color: #bbb;
+    cursor: default;
+}
+
+/* Cores para os números de minas adjacentes */
+.square.number-1 { color: blue; }
+.square.number-2 { color: green; }
+.square.number-3 { color: red; }
+.square.number-4 { color: darkblue; }
+.square.number-5 { color: darkred; }
+.square.number-6 { color: teal; }
+.square.number-7 { color: black; }
+.square.number-8 { color: gray; }
+
+/* Estilo para a mina revelada */
+.square.mine {
+    background-color: red;
+}
+
+/* Estilo para a bandeira */
+.square.flag::before {
+    content: "🚩";
+    font-size: 1.5em;
+}
+
+/* Estilos para mensagens de fim de jogo */
+#game-message {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+#game-message.win {
+    color: greenyellow;
+}
+
+#game-message.lose {
+    color: red;
+}
+
+/* Classe utilitária para esconder elementos */
+.hidden {
+    display: none;
+}
