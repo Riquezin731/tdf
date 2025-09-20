@@ -1,48 +1,66 @@
+/* RESET BÁSICO */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* BACKGROUND E FONTE */
 body {
-  font-family: 'Orbitron', sans-serif;
   background-color: #000;
-  overflow: hidden;
-}
-
-#gameCanvas {
-  display: block;
-  margin: 0 auto;
-  background: #111 url('images/doom-bg.jpg') center/cover no-repeat;
-  border: 4px solid #d32f2f;
-}
-
-#ui {
-  position: absolute;
-  top: 10px;
-  width: 100%;
-  text-align: center;
-  pointer-events: none;
-}
-
-#score {
   color: #e3e3e3;
-  font-size: 1.2rem;
-  text-shadow: 0 0 5px #ff0000;
-  margin-bottom: 10px;
+  font-family: 'Orbitron', sans-serif;
+  overflow: hidden;
+  text-align: center;
+  height: 100vh;
 }
 
-#start-btn {
-  pointer-events: auto;
-  padding: 10px 20px;
-  font-size: 1rem;
+/* LOGOTIPO COM FLICKER */
+.logo {
+  width: 300px;
+  height: 120px;
+  margin: 40px auto;
+  background: url("images/doom-eternal-logo.png") no-repeat center/contain;
+  animation: flicker 1.5s infinite;
+}
+
+/* ANIMAÇÃO DE FLICKER */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50%     { opacity: 0.8; }
+}
+
+/* TÍTULO PRINCIPAL */
+h1 {
+  font-size: 4rem;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+  margin-bottom: 30px;
+}
+
+/* BOTÃO DE AÇÃO */
+#activate {
+  padding: 15px 30px;
+  border: none;
   background-color: #d32f2f;
   color: #fff;
-  border: none;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
+}
+#activate:hover {
+  background-color: #ff5252;
 }
 
-#start-btn:hover {
-  background-color: #ff5252;
+/* MODO RAGE: FILTRO + TREMBELIQUE */
+body.rage-mode {
+  filter: hue-rotate(-20deg) brightness(1.3) contrast(1.6);
+  animation: screenShake 0.2s infinite linear;
+}
+@keyframes screenShake {
+  0%   { transform: none; }
+  25%  { transform: translate(2px, -2px); }
+  50%  { transform: translate(-2px, 2px); }
+  75%  { transform: translate(2px, 2px); }
+  100% { transform: none; }
 }
