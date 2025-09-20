@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Doom Eternal Tribute</title>
-  <!-- Fonte estilo futurista -->
+  <title>Doom Eternal - Mini Game</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
     rel="stylesheet"
@@ -12,13 +11,11 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <div class="container">
-    <div class="logo"></div>
-    <h1>DOOM ETERNAL</h1>
-    <button id="activate">ATIVAR MODO RAGE</button>
+  <div id="ui">
+    <div id="score">Pontos: 0</div>
+    <button id="start-btn">INICIAR JOGO</button>
   </div>
-
-  <audio id="rage-sound" src="sounds/rage_mode.mp3"></audio>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
   <script src="script.js"></script>
 </body>
 </html>
