@@ -1,32 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campo Minado</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doom Eternal Tribute</title>
+  <!-- Fonte estilo futurista -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <div class="game-container">
-        <h1>Campo Minado</h1>
+  <div class="container">
+    <div class="logo"></div>
+    <h1>DOOM ETERNAL</h1>
+    <button id="activate">ATIVAR MODO RAGE</button>
+  </div>
 
-        <div class="info-panel">
-            <div class="info-item">
-                <span id="mine-count">05</span>
-                <span class="info-label">Minas</span>
-            </div>
-            <button id="reset-button">RESTET</button>
-            <div class="info-item">
-                <span id="timer">100</span>
-                <span class="info-label">Tempo</span>
-            </div>
-        </div>
-
-        <div id="grid"></div>
-
-        <div id="game-message" class="hidden"></div>
-    </div>
-    
-    <script src="script.js"></script>
+  <audio id="rage-sound" src="sounds/rage_mode.mp3"></audio>
+  <script src="script.js"></script>
 </body>
 </html>
