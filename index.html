@@ -3,15 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Classic Raycast FPS - Demo</title>
+  <title>RetroFPS — Raycast 2.5D</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="hud">
-    <div id="ammo">Ammo: <span id="ammoCount">50</span></div>
-    <div id="health">Health: <span id="healthCount">100</span></div>
+    <div><strong>Health:</strong> <span id="healthCount">100</span></div>
+    <div><strong>Ammo:</strong> <span id="ammoCount">50</span></div>
+    <div id="message"></div>
   </div>
+
   <canvas id="viewport"></canvas>
-  <script src="main.js"></script>
+
+  <template id="audio-samples">
+    <audio id="sfx-shoot" src="assets/sounds/shoot.wav"></audio>
+    <audio id="sfx-hit" src="assets/sounds/hit.wav"></audio>
+  </template>
+
+  <script src="main.js" type="module"></script>
 </body>
 </html>
