@@ -1,1 +1,11 @@
 
+:root{
+  --bg:#0b0b0b;
+  --panel: rgba(0,0,0,0.5);
+  --text: #e6e6e6;
+  --accent: #ffcc33;
+}
+html,body{height:100%;margin:0;background:var(--bg);font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;}
+#viewport{display:block;width:100vw;height:100vh;image-rendering:pixelated;}
+#hud{position:fixed;left:12px;top:12px;color:var(--text);background:var(--panel);padding:8px;border-radius:6px;}
+#hud div{font-weight:600;}
